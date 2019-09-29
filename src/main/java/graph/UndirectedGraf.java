@@ -1,4 +1,5 @@
 package graph;
 
-public class UndirectedGraf extends Graf {
+public class UndirectedGraf {
+//public class UndirectedGraf extends Graf {
 }

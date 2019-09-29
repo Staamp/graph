@@ -1,5 +1,7 @@
 package graph;
 
+import java.util.Objects;
+
 public class Node {
 
     private int number;
@@ -38,6 +40,8 @@ public class Node {
     @Override
     public boolean equals(Object obj) {
 
+        if (this == obj) return true;
+
         if (obj == null) {
             return  false;
         }
@@ -46,6 +50,11 @@ public class Node {
          }
          Node n = (Node) obj;
 
-        return this.getNumber() == n.getNumber();
+        return this.getNumber() == n.getNumber() && this.getName().equals(n.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number, name);
     }
 }
