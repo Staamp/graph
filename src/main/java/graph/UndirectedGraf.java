@@ -1,5 +1,9 @@
 package graph;
 
-public class UndirectedGraf {
-//public class UndirectedGraf extends Graf {
+
+public class UndirectedGraf extends Graf {
+
+    public UndirectedGraf(int v) {
+        super(v);
+    }
 }

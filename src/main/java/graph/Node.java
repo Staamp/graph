@@ -38,6 +38,11 @@ public class Node {
     }
 
     @Override
+    public String toString() {
+        return "{" + number + "}";
+    }
+
+    @Override
     public boolean equals(Object obj) {
 
         if (this == obj) return true;

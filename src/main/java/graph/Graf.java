@@ -1,29 +1,21 @@
 package graph;
 
-import java.util.LinkedList;
+import java.util.*;
 
 public class Graf {
-    private int V;
 
+    Map<Node, List<Node>> adjList;
+    List<Node> listNode;
+    List<Edge> listEdge;
 
-    public Graf(int v) {
-        V = v;
-
+    public Graf(Map<Node, List<Node>> adjList, List<Node> listNode, List<Edge> listEdge) {
+        this.adjList = new HashMap<Node, List<Node>>();
+        this.listNode = new ArrayList<>();
+        this.listEdge = new ArrayList<>();
     }
 
-    public int getV() {
-        return V;
-    }
 
-    public LinkedList<Integer>[] getAdj() {
-        return adj;
-    }
 
-    public void setV(int v) {
-        V = v;
-    }
 
-    public void setAdj(LinkedList<Integer>[] adj) {
-        this.adj = adj;
-    }
+
 }
