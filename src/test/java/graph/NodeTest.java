@@ -38,13 +38,10 @@ public class NodeTest {
         assertNotEquals(node1.toString(),"2");
     }
 
-
     @Test
     public void getName_OK(){
         assertEquals(node1.getName(),"node1");
     }
-
-
 
     @Test
     public void check2NodeEquals() {
@@ -73,6 +70,4 @@ public class NodeTest {
         Node v = new Node("test2", 2);
         assertFalse( n.equals(v) );
     }
-
-
 }

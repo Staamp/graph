@@ -1,9 +1,12 @@
 package graph;
 
 
+import java.util.List;
+import java.util.Map;
+
 public class UndirectedGraf extends Graf {
 
-    public UndirectedGraf(int v) {
-        super(v);
+    public UndirectedGraf(Map<Node, List<Node>> adjList, List<Node> listNode, List<Edge> listEdge) {
+        super(adjList, listNode, listEdge);
     }
 }
