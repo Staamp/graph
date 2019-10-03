@@ -1,5 +1,9 @@
 package graph;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.*;
 import java.util.Collections;
 
@@ -30,18 +34,25 @@ public class Graf {
      *
      * @param node list of node with successor array formalism
      */
+    //ERREUR REVOIR 03/10/2019
     public Graf(int ... node) {
         this.adjList = new HashMap<Node, List<Node>>();
         this.listNode = new ArrayList<>();
         this.listEdge = new ArrayList<>();
         int nodeNbr = node.length;
-        int compteur = 1;
+        Node n1 = new Node(1);
+        addNode(n1);
         for (int i = 0; i < nodeNbr -1; i++) {
+            Node n2 = new Node(n1.getNumber());
             if (node[i] == 0) {
+                if (i <= nodeNbr) {
+                    n1.setNumber(node[i + 1]);
+                }
                 continue;
             }
-            Node n = new Node(node[i]);
-            addNode(n);
+            Node n3 = new Node(node[i]);
+            addNode(n3);
+            addEdge(n2, n3);
         }
 
     }
@@ -206,6 +217,19 @@ public class Graf {
             }
         }
         return  outEdge;
+    }
+
+    /***
+     * Function who return the list of incident edge of node n
+     *
+     * @param n the node where we want to know the incident edge
+     * @return the list of incident edge of node n
+     */
+    public List<Edge> getIncidentEdges(Node n) {
+        List<Edge> listIncident = new ArrayList();
+        listIncident.addAll(getOutEdge(n));
+        listIncident.addAll(getInEdge(n));
+        return listIncident;
     }
 
     /***
@@ -524,11 +548,102 @@ public class Graf {
  */
 
 
+    /***
+     * Function who create a dot format of a graph given
+     *
+     * @return a string of a dot representation
+     */
     public String toDotString() {
-        return  "";
+        String dotStringGraph = "digraph Graph {\n";
+        int numberEdge = numberOfEdge();
+        for (int i = 0; i < numberEdge; i++) {
+            dotStringGraph += " " + listEdge.get(i).getFrom().getNumber() + " -> " + listEdge.get(i).getTo().getNumber() + ";\n";
+        }
+        dotStringGraph += "}";
+        return  dotStringGraph;
     }
 
+    /***
+     * Function who exporting the graph as a file in the DOT syntax
+     */
     public void toDotFile() {
+       //String pathOfFileOutput = "D:/Github/file.dot";
+       String pathOfFileOutput = System.getProperty("user.dir") + "/" + "graph.dot"; //Current directory
+        try {
+            File ff = new File(pathOfFileOutput);
+            ff.createNewFile();
+            FileWriter ffw = new FileWriter(ff);
+            try {
+                ffw.write(toDotString());
+            } finally {
+                ffw.close();
+            }
+        } catch (Exception e) {
+            System.out.println("Error. Could not create file");
+        }
+    }
 
+    /***
+     * Create a PDF Image of a given graph with the DOT file
+     */
+    public void DotFileToPDFImage() {
+        toDotFile();
+        try {
+            Runtime.getRuntime().exec("dot -Tpdf graph.dot -o graph.pdf");
+        } catch (Exception e) {
+            System.out.println("Error. Could not create the pdf image of the graph.");
+        }
+    }
+
+    public static Graf DotFileToGraph(String path) {
+        List<String> listDot = new  ArrayList<>();
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(path));
+            String line;
+            while ((line = br.readLine()) != null) {
+                //System.out.println(line);
+                listDot.add(line);
+            }
+            br.close();
+        } catch (Exception e) {
+            System.out.println("Error. Could not open the dot file.");
+        }
+
+        int nbLineDotFile = listDot.size();
+        Graf g = null;
+
+
+        for (int i = 0; i < nbLineDotFile; i++) {
+            if (listDot.get(i).equals("\n")) {
+                continue;
+            }
+            if (i == 0) {
+                String[] line1 = listDot.get(i).split(" ");
+                if (line1[0].equals("digraph")) {
+                    g = new Graf();
+                }
+                if (line1[0].equals("graph")) {
+                    g = new UndirectedGraf();
+                }
+            }
+            String[] arrOfStr = listDot.get(i).split("");
+            /*for (int j = 0; j < arrOfStr.length; j++) {
+                System.out.println(arrOfStr[j]);
+            }*/
+            if (i != 0 && i != nbLineDotFile-1) {
+                //System.out.println("length of line of string " + arrOfStr.length);
+                if (arrOfStr.length > 6) {
+                    //System.out.println(arrOfStr[1]);
+                    //System.out.println(arrOfStr[6] + "\n");
+                    Node n1 = new Node(Integer.parseInt(arrOfStr[1]));
+                    Node n2 = new Node(Integer.parseInt(arrOfStr[6]));
+                    g.addNode(n1);
+                    g.addNode(n2);
+                    g.addEdge(n1, n2);
+                }
+            }
+        }
+
+        return g;
     }
 }

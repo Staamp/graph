@@ -1,9 +1,6 @@
 package graph;
 
-import graph.Node;
-import graph.Graf;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.List;
@@ -140,8 +137,15 @@ public class GrafTest {
 
 
     @Test
-    public void addManyNodeWithConstructor() {
+    public void addManyNodeWithConstructor1() {
         Graf g = new Graf(2, 4, 0, 0, 6, 0, 2, 3, 5, 8, 0, 0, 4, 7, 0, 3, 0, 7, 0);
+        g.getAllNodes();
+        g.getAllEdges();
+    }
+
+    @Test
+    public void addManyNodeWithConstructor2() {
+        Graf g = new Graf(2, 3, 0, 3, 4, 6, 0, 6, 0, 5, 0, 2, 0, 4, 0);
         g.getAllNodes();
         g.getAllEdges();
     }
@@ -183,6 +187,32 @@ public class GrafTest {
         g.getAllEdges();
         List<Edge> outN1 = g.getOutEdge(n1);
         g.printList(outN1);
+    }
+
+    @Test
+    public void checkEntranceIncidentNode() {
+        Node n1 = new Node("test", 1);
+        Node n2 = new Node(2);
+        Node n3 = new Node(3);
+        Node n4 = new Node(4);
+        Node n5 = new Node(5);
+        Graf g = new Graf(adjList, listNode, listEdge);
+        g.addNode(n1);
+        g.addEdge(n1, n2);
+        g.addEdge(n3, n1);
+        g.addEdge(n4, n5);
+        g.addEdge(n5, n1);
+        g.addEdge(n1, n4);
+        g.getAllEdges();
+        System.out.println("\n");
+        List<Edge> inN1 = g.getInEdge(n1);
+        g.printList(inN1);
+        System.out.println("\n");
+        List<Edge> outN1 = g.getOutEdge(n1);
+        g.printList(outN1);
+        System.out.println("\n");
+        List<Edge> incidentN1 = g.getIncidentEdges(n1);
+        g.printList(incidentN1);
     }
 
     @Test
@@ -409,4 +439,47 @@ public class GrafTest {
         }
     }
 
+    @Test
+    public void checkToDotString() {
+        Node n1 = new Node(1);
+        Node n2 = new Node(2);
+        Node n3 = new Node(3);
+        Node n4 = new Node(4);
+        Graf g = new Graf(adjList, listNode, listEdge);
+        g.addEdge(n1,n2);
+        g.addEdge(n1,n3);
+        g.addEdge(n2,n3);
+        g.addEdge(n3,n1);
+        g.addEdge(n3,n4);
+        g.addEdge(n4,n4);
+        String dotString = g.toDotString();
+        System.out.println(dotString);
+    }
+
+    @Test
+    public void checkToDotFile() {
+        Node n1 = new Node(1);
+        Node n2 = new Node(2);
+        Node n3 = new Node(3);
+        Node n4 = new Node(4);
+        Graf g = new Graf(adjList, listNode, listEdge);
+        g.addEdge(n1,n2);
+        g.addEdge(n1,n3);
+        g.addEdge(n2,n3);
+        g.addEdge(n3,n1);
+        g.addEdge(n3,n4);
+        g.addEdge(n4,n4);
+        g.toDotFile();
+    }
+
+
+    @Test
+    public void checkDotFileToGraph() {
+        String path = "D:/Github/graph/graph.dot";
+        System.out.println("Lecture :");
+        Graf g = Graf.DotFileToGraph(path);
+
+        g.getAllNodes();
+        g.getAllEdges();
+    }
 }
