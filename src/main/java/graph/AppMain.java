@@ -1,12 +1,10 @@
-package graph;
+package graphNV;
 
 
-
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Scanner;
 
-import static graph.Graf.DotFileToGraph;
+import static graphNV.Graf.DotFileToGraph;
 
 /**
  * Hello world!
@@ -71,6 +69,7 @@ public class AppMain {
             System.out.println("10- Traverse the graph in BSF.");
             System.out.println("11- Show the nodes of graph.");
             System.out.println("12- Show the edges of graph.");
+            System.out.println("13- Generate a PDF image of the graph with dot file.");
             System.out.println("0- Quit.");
             String menu2 = sc.nextLine();
             String value1 = "";
@@ -153,6 +152,11 @@ public class AppMain {
                 case 12: {
                     System.out.println("Show the edges of graph.");
                     g.getAllEdges();
+                }
+                break;
+                case 13: {
+                    System.out.println("Generate a PDF image of the graph with dot file.");
+                    g.DotFileToPDFImage();
                 }
                 break;
                 default: {

@@ -1,4 +1,4 @@
-package graph;
+package graphNV;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -554,7 +554,7 @@ public class Graf {
      * @return a string of a dot representation
      */
     public String toDotString() {
-        String dotStringGraph = "digraph Graph {\n";
+        String dotStringGraph = "digraph g {\n";
         int numberEdge = numberOfEdge();
         for (int i = 0; i < numberEdge; i++) {
             dotStringGraph += " " + listEdge.get(i).getFrom().getNumber() + " -> " + listEdge.get(i).getTo().getNumber() + ";\n";
