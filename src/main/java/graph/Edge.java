@@ -1,4 +1,4 @@
-package graph;
+package graphNV;
 
 /***
  * Edge is the class who create and compare the edges. This class implements comparable to compare two edges together
