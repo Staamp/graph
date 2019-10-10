@@ -22,9 +22,24 @@ public class GrafTest {
     }
 
     @Test
+    public void emptyCst1() {
+        Graf g = new Graf(adjList, listNode, listEdge);
+        g.getAllNodes();
+        g.getAllEdges();
+    }
+
+    @Test
+    public void emptyCst2() {
+        Graf g = new Graf();
+        g.getAllNodes();
+        g.getAllEdges();
+    }
+
+    @Test
     public void addOneNode() {
         Node n = new Node("test", 1);
         Graf g = new Graf(adjList, listNode, listEdge);
+        g.getAllNodes();
         g.addNode(n);
         g.getAllNodes();
     }
@@ -472,7 +487,6 @@ public class GrafTest {
         g.toDotFile();
     }
 
-
     @Test
     public void checkDotFileToGraph() {
         String path = "D:/Github/graph/graph.dot";
@@ -481,5 +495,27 @@ public class GrafTest {
 
         g.getAllNodes();
         g.getAllEdges();
+    }
+
+    @Test
+    public void checkDenseGraph() {
+        Graf g = Graf.denseGraph();
+        System.out.println(g.toDotString());
+    }
+
+    @Test
+    public void checkConnectedGraph() {
+        Graf g = Graf.connectedGraph();
+        System.out.println(g.toDotString());
+        System.out.println(g.listEdge.size());
+    }
+
+    @Test
+    public void checkParameterizedGraph() {
+        Graf g = Graf.parameterizedGraph(500, 1200, 0);
+        System.out.println(g.toDotString());
+        System.out.println(g.listEdge.size());
+        assertEquals(1200, g.listEdge.size());
+        assertEquals(500, g.listNode.size());
     }
 }

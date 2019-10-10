@@ -40,9 +40,13 @@ public class Graf {
         this.listNode = new ArrayList<>();
         this.listEdge = new ArrayList<>();
         int nodeNbr = node.length;
-        Node n1 = new Node(1);
-        addNode(n1);
-        for (int i = 0; i < nodeNbr -1; i++) {
+        if (nodeNbr != 0) {
+            Node n1 = new Node(1);
+            addNode(n1);
+        }
+        //System.out.println("Node nbr " + nodeNbr);
+       /* for (int i = 0; i <= nodeNbr -1; i++) {
+            //System.out.println("ADD NODE " + nodeNbr);
             Node n2 = new Node(n1.getNumber());
             if (node[i] == 0) {
                 if (i <= nodeNbr) {
@@ -53,8 +57,7 @@ public class Graf {
             Node n3 = new Node(node[i]);
             addNode(n3);
             addEdge(n2, n3);
-        }
-
+        }*/
     }
 
 
@@ -97,8 +100,10 @@ public class Graf {
      * @return a boolean who say the edge exist
      */
     public boolean existsEdge(Edge e) {
-        if (listEdge.contains(e)) {
-            return true;
+        for (int i = 0, c = listEdge.size(); i < c; i++) {
+            if ((e.getFrom().getNumber() == listEdge.get(i).getFrom().getNumber()) && (e.getTo().getNumber() == listEdge.get(i).getTo().getNumber())) {
+                return true;
+            }
         }
         return false;
     }
@@ -554,7 +559,7 @@ public class Graf {
      * @return a string of a dot representation
      */
     public String toDotString() {
-        String dotStringGraph = "digraph Graph {\n";
+        String dotStringGraph = "digraph g {\n";
         int numberEdge = numberOfEdge();
         for (int i = 0; i < numberEdge; i++) {
             dotStringGraph += " " + listEdge.get(i).getFrom().getNumber() + " -> " + listEdge.get(i).getTo().getNumber() + ";\n";
@@ -595,6 +600,12 @@ public class Graf {
         }
     }
 
+    /***
+     * Function who read a file with dot formalism and create a graph
+     *
+     * @param path of the dot file
+     * @return a graph
+     */
     public static Graf DotFileToGraph(String path) {
         List<String> listDot = new  ArrayList<>();
         try {
@@ -645,5 +656,119 @@ public class Graf {
         }
 
         return g;
+    }
+
+    /***
+     * Function who create a connected graph
+     *
+     * @return a connected graph
+     */
+    public static Graf connectedGraph() {
+        Graf cg = new Graf();
+        int low = 5;
+        int high = 50;
+        int nodes = (int)(Math.random()*((high - low) + 1) + low);
+        //int nodes = 10;
+        System.out.println("Number of nodes with math random " + nodes);
+
+        for (int i = 1; i < nodes; i++) {
+            cg.addNode(new Node(i));
+        }
+        int lowEdge = 1;
+        int maxEdge = nodes * nodes;
+        int edges = (int)(Math.random()*((maxEdge - lowEdge) + 1) + lowEdge);
+        System.out.println("Number of edges with math random " + edges);
+        int n1 = 0;
+        int n2 = 0;
+        for (int i = 0; i < edges; i++) {
+            do {
+                n1 = (int) ((Math.random() * nodes) + 1);
+                n2 = (int) ((Math.random() * nodes) + 1);
+            } while (cg.existsEdge(new Edge(new Node(n1), new Node(n2))));
+            cg.addEdge(new Node(n1), new Node(n2));
+        }
+        cg.sortListOfEdge();
+
+        for (int i = 1; i < nodes; i++) {
+            if (cg.getIncidentEdges(new Node(i)).size() == 0) {
+                cg.removeNode(new Node(i));
+            }
+        }
+
+        return cg;
+    }
+
+    /***
+     * Function who create a dense graph (with density drawing near to 1)
+     *
+     * @return a dense graph
+     */
+    public static Graf denseGraph() {
+        Random r = new Random();
+        int low = 5;
+        int high = 50;
+        int nodes = r.nextInt(high - low) + high;
+        System.out.println("Number of nodes with random : " + nodes);
+
+        Graf dg = new Graf();
+
+        for (int i = 1; i < nodes; i++) {
+            dg.addNode(new Node(i));
+        }
+
+        for (int i = 1; i < nodes; i++) {
+            for (int j = 1; j < nodes; j++) {
+                if (!dg.existsEdge(new Edge(new Node(i), new Node(j)))) {
+                    dg.addEdge(new Node(i), new Node(j));
+                }
+            }
+        }
+        return dg;
+    }
+
+    /***
+     * Function who create a sparse graph (with density drawing near to 0)
+     *
+     * @return a sparse graph
+     */
+    public static Graf sparseGraph() {
+        return null;
+    }
+
+    /***
+     * Function who create a parameterized graph
+     *
+     * @param nodes number of node
+     * @param edges number of edge
+     * @param probability edge probability distribution
+     * @return a parameterized graph
+     */
+    public static Graf parameterizedGraph(int nodes, int edges, int probability) {
+        Graf pg = new Graf();
+        for (int i = 1; i < nodes + 1; i++) {
+            pg.addNode(new Node(i));
+        }
+
+        int n1 = 0;
+        int n2 = 0;
+        for (int i = 0; i < edges; i++) {
+            do {
+                n1 = (int) ((Math.random() * nodes) + 1);
+                n2 = (int) ((Math.random() * nodes) + 1);
+            } while (pg.existsEdge(new Edge(new Node(n1), new Node(n2))));
+            pg.addEdge(new Node(n1), new Node(n2));
+        }
+        pg.sortListOfEdge();
+
+        return pg;
+    }
+
+    /***
+     * Function who create a DAG (Directed acyclic graph)
+     *
+     * @return a DAG
+     */
+    public static Graf DAG() {
+        return null;
     }
 }
