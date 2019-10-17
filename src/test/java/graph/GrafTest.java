@@ -498,8 +498,20 @@ public class GrafTest {
     }
 
     @Test
+    public void checkStringToGraph() {
+        String test = "Test \n salut";
+        Graf g = Graf.StringToGraph(test);
+    }
+
+    @Test
     public void checkDenseGraph() {
         Graf g = Graf.denseGraph();
+        System.out.println(g.toDotString());
+    }
+
+    @Test
+    public void checkSparseGraph() {
+        Graf g = Graf.sparseGraph();
         System.out.println(g.toDotString());
     }
 
