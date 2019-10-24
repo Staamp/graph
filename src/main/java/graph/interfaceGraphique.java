@@ -23,7 +23,7 @@ public class interfaceGraphique extends Application {
     @Override
     public void start(final Stage primaryStage) throws Exception {
 
-        final TextArea textArea1 = new TextArea("graph g {\n\n\n}");
+        final TextArea textArea1 = new TextArea("digraph g {\n \n \n}");
         textArea1.setMinSize(250, 150);
         textArea1.setMaxSize(250, 300);
 

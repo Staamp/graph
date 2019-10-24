@@ -14,8 +14,6 @@ import static org.junit.Assert.*;
 public class GrafTest {
 
     Map<Node, List<Node>> adjList;
-    List<Node> listNode;
-    List<Edge> listEdge;
     @Before
     public void begin(){
 
@@ -23,7 +21,7 @@ public class GrafTest {
 
     @Test
     public void emptyCst1() {
-        Graf g = new Graf(adjList, listNode, listEdge);
+        Graf g = new Graf(adjList);
         g.getAllNodes();
         g.getAllEdges();
     }
@@ -38,7 +36,7 @@ public class GrafTest {
     @Test
     public void addOneNode() {
         Node n = new Node("test", 1);
-        Graf g = new Graf(adjList, listNode, listEdge);
+        Graf g = new Graf(adjList);
         g.getAllNodes();
         g.addNode(n);
         g.getAllNodes();
@@ -48,7 +46,7 @@ public class GrafTest {
     public void addTwoNode() {
         Node n1 = new Node("test", 1);
         Node n2 = new Node(2);
-        Graf g = new Graf(adjList, listNode, listEdge);
+        Graf g = new Graf(adjList);
         g.addNode(n1);
         g.addNode(n2);
         g.getAllNodes();
@@ -58,19 +56,19 @@ public class GrafTest {
     public void addTwoRemoveOneNode() {
         Node n1 = new Node("test", 1);
         Node n2 = new Node(2);
-        Graf g = new Graf(adjList, listNode, listEdge);
+        Graf g = new Graf(adjList);
         g.addNode(n1);
         g.addNode(n2);
-        g.getAllNodes();
+        //g.getAllNodes();
         g.removeNode(n1);
-        g.getAllNodes();
+       // g.getAllNodes();
     }
 
     @Test
     public void addNodeRemoveOneEgdeAndCheckNode() {
         Node n1 = new Node("test", 1);
         Node n2 = new Node(2);
-        Graf g = new Graf(adjList, listNode, listEdge);
+        Graf g = new Graf(adjList);
         g.addNode(n1);
         g.addNode(n2);
         g.addEdge(n1, n1);
@@ -85,7 +83,7 @@ public class GrafTest {
     @Test
     public void removeNodeNotExist() {
         Node n1 = new Node("test", 1);
-        Graf g = new Graf(adjList, listNode, listEdge);
+        Graf g = new Graf(adjList);
         g.getAllNodes();
         g.removeNode(n1);
         g.getAllNodes();
@@ -95,7 +93,7 @@ public class GrafTest {
     public void addNodesWithEdge() {
         Node n1 = new Node("test", 1);
         Node n2 = new Node(2);
-        Graf g = new Graf(adjList, listNode, listEdge);
+        Graf g = new Graf(adjList);
         g.addNode(n1);
         g.addNode(n2);
         g.addEdge(n1, n2);
@@ -107,7 +105,7 @@ public class GrafTest {
     public void addNodesWithEdgeWithOneEdgeNotExist() {
         Node n1 = new Node("test", 1);
         Node n2 = new Node(2);
-        Graf g = new Graf(adjList, listNode, listEdge);
+        Graf g = new Graf(adjList);
         g.addNode(n1);
         g.addEdge(n1, n2);
         g.getAllNodes();
@@ -119,7 +117,7 @@ public class GrafTest {
         Node n1 = new Node("test", 1);
         Node n2 = new Node(2);
         Node n3 = new Node(3);
-        Graf g = new Graf(adjList, listNode, listEdge);
+        Graf g = new Graf(adjList);
         g.addNode(n1);
         g.addNode(n2);
         g.addNode(n3);
@@ -139,7 +137,7 @@ public class GrafTest {
         Node n3 = new Node(3);
         Node n4 = new Node(4);
         Node n5 = new Node(5);
-        Graf g = new Graf(adjList, listNode, listEdge);
+        Graf g = new Graf(adjList);
         g.addNode(n1);
         g.addEdge(n1, n2);
         g.addEdge(n3, n1);
@@ -173,7 +171,7 @@ public class GrafTest {
         Node n3 = new Node(3);
         Node n4 = new Node(4);
         Node n5 = new Node(5);
-        Graf g = new Graf(adjList, listNode, listEdge);
+        Graf g = new Graf(adjList);
         g.addNode(n1);
         g.addEdge(n1, n2);
         g.addEdge(n3, n1);
@@ -192,7 +190,7 @@ public class GrafTest {
         Node n3 = new Node(3);
         Node n4 = new Node(4);
         Node n5 = new Node(5);
-        Graf g = new Graf(adjList, listNode, listEdge);
+        Graf g = new Graf(adjList);
         g.addNode(n1);
         g.addEdge(n1, n2);
         g.addEdge(n3, n1);
@@ -211,7 +209,7 @@ public class GrafTest {
         Node n3 = new Node(3);
         Node n4 = new Node(4);
         Node n5 = new Node(5);
-        Graf g = new Graf(adjList, listNode, listEdge);
+        Graf g = new Graf(adjList);
         g.addNode(n1);
         g.addEdge(n1, n2);
         g.addEdge(n3, n1);
@@ -237,7 +235,7 @@ public class GrafTest {
         Node n3 = new Node(3);
         Node n4 = new Node(4);
         Node n5 = new Node(5);
-        Graf g = new Graf(adjList, listNode, listEdge);
+        Graf g = new Graf(adjList);
         g.addNode(n1);
         g.addEdge(n1, n2);
         g.addEdge(n3, n1);
@@ -257,7 +255,7 @@ public class GrafTest {
         Node n4 = new Node(4);
         Node n5 = new Node(5);
         Node n6 = new Node(6);
-        Graf g = new Graf(adjList, listNode, listEdge);
+        Graf g = new Graf(adjList);
         g.addEdge(n1, n2);
         g.addEdge(n1, n3);
         g.addEdge(n2, n3);
@@ -283,7 +281,7 @@ public class GrafTest {
         Node n4 = new Node(4);
         Node n5 = new Node(5);
         Node n6 = new Node(6);
-        Graf g = new Graf(adjList, listNode, listEdge);
+        Graf g = new Graf(adjList);
         g.addEdge(n3, n6);
         g.addEdge(n1, n3);
         g.addEdge(n2, n4);
@@ -306,7 +304,7 @@ public class GrafTest {
         Node n4 = new Node(4);
         Node n5 = new Node(5);
         Node n6 = new Node(6);
-        Graf g = new Graf(adjList, listNode, listEdge);
+        Graf g = new Graf(adjList);
         g.addEdge(n1, n2);
         g.addEdge(n1, n3);
         g.addEdge(n2, n3);
@@ -335,7 +333,7 @@ public class GrafTest {
         Node n4 = new Node(4);
         Node n5 = new Node(5);
         Node n6 = new Node(6);
-        Graf g = new Graf(adjList, listNode, listEdge);
+        Graf g = new Graf(adjList);
         g.addEdge(n1, n2);
         g.addEdge(n1, n3);
         g.addEdge(n2, n3);
@@ -358,7 +356,7 @@ public class GrafTest {
         Node n4 = new Node(4);
         Node n5 = new Node(5);
         Node n6 = new Node(6);
-        Graf g = new Graf(adjList, listNode, listEdge);
+        Graf g = new Graf(adjList);
         g.addEdge(n1, n2);
         g.addEdge(n1, n3);
         g.addEdge(n2, n3);
@@ -390,7 +388,7 @@ public class GrafTest {
         Node n4 = new Node(4);
         Node n5 = new Node(5);
         Node n6 = new Node(6);
-        Graf g = new Graf(adjList, listNode, listEdge);
+        Graf g = new Graf(adjList);
         g.addEdge(n1, n1);
         g.addEdge(n1, n2);
         g.addEdge(n1, n4);
@@ -421,7 +419,7 @@ public class GrafTest {
         Node n3 = new Node(3);
         Node n4 = new Node(4);
         Node n5 = new Node(5);
-        Graf g = new Graf(adjList, listNode, listEdge);
+        Graf g = new Graf(adjList);
         g.addEdge(n2,n1);
         g.addEdge(n1,n3);
         g.addEdge(n3,n2);
@@ -440,7 +438,7 @@ public class GrafTest {
         Node n2 = new Node(2);
         Node n3 = new Node(3);
         Node n4 = new Node(4);
-        Graf g = new Graf(adjList, listNode, listEdge);
+        Graf g = new Graf(adjList);
         g.addEdge(n1,n2);
         g.addEdge(n1,n3);
         g.addEdge(n2,n3);
@@ -460,7 +458,7 @@ public class GrafTest {
         Node n2 = new Node(2);
         Node n3 = new Node(3);
         Node n4 = new Node(4);
-        Graf g = new Graf(adjList, listNode, listEdge);
+        Graf g = new Graf(adjList);
         g.addEdge(n1,n2);
         g.addEdge(n1,n3);
         g.addEdge(n2,n3);
@@ -477,7 +475,7 @@ public class GrafTest {
         Node n2 = new Node(2);
         Node n3 = new Node(3);
         Node n4 = new Node(4);
-        Graf g = new Graf(adjList, listNode, listEdge);
+        Graf g = new Graf(adjList);
         g.addEdge(n1,n2);
         g.addEdge(n1,n3);
         g.addEdge(n2,n3);
@@ -519,15 +517,15 @@ public class GrafTest {
     public void checkConnectedGraph() {
         Graf g = Graf.connectedGraph();
         System.out.println(g.toDotString());
-        System.out.println(g.listEdge.size());
+        System.out.println(g.numberOfEdge());
     }
 
     @Test
     public void checkParameterizedGraph() {
         Graf g = Graf.parameterizedGraph(500, 1200, 0);
         System.out.println(g.toDotString());
-        System.out.println(g.listEdge.size());
-        assertEquals(1200, g.listEdge.size());
-        assertEquals(500, g.listNode.size());
+        System.out.println(g.numberOfEdge());
+        assertEquals(1200, g.numberOfEdge());
+        assertEquals(500, g.numberOfNode());
     }
 }

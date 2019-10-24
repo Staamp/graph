@@ -7,26 +7,24 @@ import java.io.FileWriter;
 import java.util.*;
 import java.util.Collections;
 
+import static java.util.Map.Entry.comparingByKey;
+
 /***
- * Graph is the class who create nodes, edges and realize many manipulation on graph
+ * Graph is the class who create nodes, edges and realize many manipulation on directed graph
  */
 public class Graf {
 
     Map<Node, List<Node>> adjList;
-    List<Node> listNode;
-    List<Edge> listEdge;
+    //List<Node> listNode;
+    //List<Edge> listEdge;
 
     /***
      * Constructor of a graph
      *
      * @param adjList map with node and list of node
-     * @param listNode list of node
-     * @param listEdge list of edge
      */
-    public Graf(Map<Node, List<Node>> adjList, List<Node> listNode, List<Edge> listEdge) {
+    public Graf(Map<Node, List<Node>> adjList) {
         this.adjList = new HashMap<Node, List<Node>>();
-        this.listNode = new ArrayList<>();
-        this.listEdge = new ArrayList<>();
     }
 
     /***
@@ -37,8 +35,6 @@ public class Graf {
     //ERREUR REVOIR 03/10/2019
     public Graf(int ... node) {
         this.adjList = new HashMap<Node, List<Node>>();
-        this.listNode = new ArrayList<>();
-        this.listEdge = new ArrayList<>();
         int nodeNbr = node.length;
         if (nodeNbr != 0) {
             Node n1 = new Node(1);
@@ -75,8 +71,8 @@ public class Graf {
      * @param n the node added
      */
     public void addNode(Node n) {
-        if (!listNode.contains(n)) {
-            listNode.add(n);
+        if (!existsNode(n)) {
+            adjList.put(n, new ArrayList<Node>());
         }
     }
 
@@ -87,7 +83,7 @@ public class Graf {
      * @return a boolean who say the edge exist
      */
     public boolean existsNode(Node n) {
-        if (listNode.contains(n)) {
+        if (adjList.containsKey(n)) {
             return true;
         }
         return false;
@@ -100,10 +96,10 @@ public class Graf {
      * @return a boolean who say the edge exist
      */
     public boolean existsEdge(Edge e) {
-        for (int i = 0, c = listEdge.size(); i < c; i++) {
-            if ((e.getFrom().getNumber() == listEdge.get(i).getFrom().getNumber()) && (e.getTo().getNumber() == listEdge.get(i).getTo().getNumber())) {
+        for (int i = 0, c = adjList.size(); i < c; i++) {
+            /*if ((e.getFrom().getNumber() == adjList.get(i).getFrom().getNumber()) && (e.getTo().getNumber() == listEdge.get(i).getTo().getNumber())) {
                 return true;
-            }
+            }*/
         }
         return false;
     }
@@ -125,7 +121,7 @@ public class Graf {
         }
         Edge e = new Edge(n1, n2);
         if (!existsEdge(e)) {
-            listEdge.add(e);
+            adjList.get(n1).add(n2);
         } else {
             System.out.print("The node " + e.toString() + " already exist. Please create a new edge with other node.");
         }
@@ -139,13 +135,16 @@ public class Graf {
      */
     public void removeNode(Node n) {
         if (existsNode(n)) {
-            int numberEdge = numberOfEdge();
-            for (int i = 0; i < numberEdge; i++) {
-                if (listEdge.get(i).getFrom().equals(n) || listEdge.get(i).getTo().equals(n)) {
-                    removeEdge(listEdge.get(i).getFrom(), listEdge.get(i).getTo());
+            this.adjList.remove(n);
+            for (Map.Entry<Node, List<Node>> entry : adjList.entrySet()) {
+
+                for (int i = 0, c = entry.getValue().size(); i < c; i++) {
+                    Node nodeTo = entry.getValue().get(i);
+                    if (n.getNumber() == nodeTo.getNumber()) {
+                        entry.getValue().remove(i);
+                    }
                 }
             }
-            listNode.remove(n);
         }
     }
 
@@ -157,11 +156,13 @@ public class Graf {
      */
     public void removeEdge(Node n1, Node n2) {
         if (existsNode(n1) && existsNode(n2)) {
-            int numberEdge = numberOfEdge();
-            for (int i = 0; i < numberEdge; i++) {
-                if (listEdge.get(i).getFrom().equals(n1) && listEdge.get(i).getTo().equals(n2)) {
-                    listEdge.remove(i);
-                    break;
+            for (Map.Entry<Node, List<Node>> entry : adjList.entrySet()) {
+                Node nodeFrom = entry.getKey();
+                for (int i = 0, c = entry.getValue().size(); i < c; i++) {
+                    Node nodeTo = entry.getValue().get(i);
+                    if (n1.getNumber() == nodeFrom.getNumber() && n2.getNumber() == nodeTo.getNumber()) {
+                        entry.getValue().remove(i);
+                    }
                 }
             }
         }
@@ -175,14 +176,18 @@ public class Graf {
      */
     public List<Node> getSuccessors(Node n) {
         System.out.println("List of nodes who is successor of node " + n.getNumber() + " :");
-        int numberEdge = numberOfEdge();
         List<Node> successors = new ArrayList<>();
-        for (int i = 0; i < numberEdge; i++) {
-            if (listEdge.get(i).getFrom().getNumber() == n.getNumber()) {
-                successors.add(listEdge.get(i).getTo());
-            }
-            if (listEdge.get(i).getTo().getNumber() == n.getNumber()) {
-                successors.add(listEdge.get(i).getFrom());
+        List<Node> lnode = adjList.get(n);
+        int lnodeSize = lnode.size();
+        for (int i = 0; i < lnodeSize; i++) {
+            successors.add(lnode.get(i));
+        }
+        for (Map.Entry<Node, List<Node>> entry : adjList.entrySet()) {
+            int nodeNumber = entry.getKey().getNumber();
+            for (int i = 0, c = entry.getValue().size(); i < c; i++) {
+                if (entry.getValue().get(i).getNumber() == n.getNumber()) {
+                    successors.add(entry.getKey());
+                }
             }
         }
         return successors;
@@ -198,11 +203,16 @@ public class Graf {
         //System.out.println("List of edges who entrance of node " + n.getNumber() + " :");
         int numberEdge = numberOfEdge();
         List<Edge> inEdge = new ArrayList<>();
-        for (int i = 0; i < numberEdge; i++) {
-            if (n.getNumber() == listEdge.get(i).getTo().getNumber()) {
-                inEdge.add(listEdge.get(i));
+        for (Map.Entry<Node, List<Node>> entry : adjList.entrySet()) {
+            int nodeNumber = entry.getKey().getNumber();
+            for (int i = 0, c = entry.getValue().size(); i < c; i++) {
+                if (entry.getValue().get(i).getNumber() == n.getNumber()) {
+                    //System.out.println(" n " + entry.getKey().getNumber());
+                    inEdge.add(new Edge(entry.getKey(), n));
+                }
             }
         }
+
         return  inEdge;
     }
 
@@ -216,10 +226,10 @@ public class Graf {
         //System.out.println("List of edges who out of node " + n.getNumber() + " :");
         int numberEdge = numberOfEdge();
         List<Edge> outEdge = new ArrayList<>();
-        for (int i = 0; i < numberEdge; i++) {
-            if (n.getNumber() == listEdge.get(i).getFrom().getNumber()) {
-                outEdge.add(listEdge.get(i));
-            }
+        List<Node> lnode = adjList.get(n);
+        int lnodeSize = lnode.size();
+        for (int i = 0; i < lnodeSize; i++) {
+            outEdge.add(new Edge(n, lnode.get(i)));
         }
         return  outEdge;
     }
@@ -243,7 +253,7 @@ public class Graf {
      * @return the number of node in graph
      */
     public int numberOfNode() {
-        return listNode.size();
+        return adjList.size();
     }
 
     /***
@@ -252,7 +262,13 @@ public class Graf {
      * @return the number of edge in graph
      */
     public int numberOfEdge() {
-        return listEdge.size();
+        int numberEdge = 0;
+        for (Map.Entry<Node, List<Node>> entry : adjList.entrySet()) {
+            int nodeNumber = entry.getKey().getNumber();
+            int nodeNumberEdgeSize = entry.getValue().size();
+            numberEdge += nodeNumberEdgeSize;
+        }
+        return numberEdge;
     }
 
     /***
@@ -262,11 +278,14 @@ public class Graf {
      */
     public List<Node> getAllNodes() {
         int numberNode = numberOfNode();
+        List listNode = new ArrayList<Node>();
         System.out.println("List of nodes (number of nodes : " + numberNode + ") : ");
-        for (int i = 0; i < numberNode; i++) {
-            String nodeNumber = listNode.get(i).toString();
+        for (Map.Entry<Node, List<Node>> entry : adjList.entrySet()) {
+            int nodeNumber = entry.getKey().getNumber();
+            listNode.add(entry.getKey());
             System.out.println(nodeNumber);
         }
+        sortListNode(listNode);
         return listNode;
     }
 
@@ -276,12 +295,18 @@ public class Graf {
      * @return a list of all edges in graph
      */
     public List<Edge> getAllEdges() {
+        sortMapNodeByKey();
         System.out.println("List of edges : ");
+        List<Edge> listEdge = new ArrayList<Edge>();
         int numberEdge = numberOfEdge();
-        for (int i = 0; i < numberEdge; i++) {
-            String nodeEdge = listEdge.get(i).toString();
-            System.out.println(nodeEdge);
+        for (Map.Entry<Node, List<Node>> entry : adjList.entrySet()) {
+            int nodeNumber = entry.getKey().getNumber();
+            for (int i = 0, c = entry.getValue().size(); i < c; i++) {
+                System.out.println(nodeNumber + " -> " + entry.getValue().get((i)));
+                listEdge.add(new Edge(new Node(nodeNumber), new Node(entry.getValue().get(i).getNumber())));
+            }
         }
+        System.out.println("\n");
         return listEdge;
     }
 
@@ -313,28 +338,71 @@ public class Graf {
      * @return an array for obtaining a representation of the graph in the successor array formalism
      */
     public int[] getSuccessorArray() {
-        sortListOfEdge();
+        sortMapNodeByKey();
         int sizeEdge = this.numberOfEdge();
         int sizeTab = sizeEdge + this.numberOfNode();
         int[] successorArray = new int[sizeTab];
-        int numberStart = 1;
-        for (int i = 0, j = 0; i < sizeEdge; i++) {
-            System.out.println(listEdge.get(i).toString());
-            if (numberStart != listEdge.get(i).getFrom().getNumber()) {
-                numberStart = listEdge.get(i).getFrom().getNumber();
-                successorArray[j] = 0;
-                j++;
-            }
-            if (numberStart == listEdge.get(i).getFrom().getNumber()) {
-                successorArray[j] = listEdge.get(i).getTo().getNumber();
-                j++;
-            }
 
+        int j = 0;
+        for (Map.Entry<Node, List<Node>> entry : adjList.entrySet()) {
+            Node nodeFrom = entry.getKey();
+            for (int i = 0, c = entry.getValue().size(); i < c; i++) {
+                successorArray[j] = entry.getValue().get(i).getNumber();
+                j++;
+            }
+            successorArray[j] = 0;
+            j++;
         }
         return  successorArray;
     }
 
+    /***
+     * Function who sort one list by number
+     */
+    public void sortListNode(List<Node> n) {
+        Collections.sort(n, new Comparator<Node>() {
+            @Override
+            public int compare(Node o1, Node o2) {
+                if (o1.getNumber() > o2.getNumber()) {
+                    return 1;
+                }
+                if (o1.getNumber() < o2.getNumber()) {
+                    return -1;
+                }
+                return 0;
+            }
+        });
+    }
+
+    /***
+     * Function who sort the map adjList by key and sort the list of the associated value
+     */
+    public void sortMapNodeByKey() {
+        Map<Node, List<Node>> current = adjList;
+        Map<Node, List<Node>> lmap = new TreeMap<Node, List<Node>>(
+            new Comparator<Node>() {
+                @Override
+                public int compare(Node o1, Node o2) {
+                    if (o1.getNumber() > o2.getNumber()) {
+                        return 1;
+                    }
+                    if (o1.getNumber() < o2.getNumber()) {
+                        return -1;
+                    }
+                    return 0;
+                }
+            }
+        );
+        lmap.putAll(current);
+        for (Map.Entry<Node, List<Node>> entry : adjList.entrySet()) {
+            sortListNode(entry.getValue());
+        }
+        adjList = lmap;
+    }
+
+
     public List<Edge> sortListOfEdge() {
+        List<Edge> listEdge = getAllEdges();
         Collections.sort(listEdge, new Comparator<Edge>() {
             @Override
             public int compare(Edge o1, Edge o2) {
@@ -350,6 +418,7 @@ public class Graf {
      * @return the matrix of the given graph
      */
     public int[][] getAdjMatrix() {
+        sortMapNodeByKey();
         int numberNode = numberOfNode();
         int[][] adjMatrix = new int[numberNode][numberNode];
         int [] SA = getSuccessorArray();
@@ -359,7 +428,6 @@ public class Graf {
                 adjMatrix[i][j] = 0;
             }
         }
-        //int numberStart = listNode.get(0).getNumber();
         int numberStart = 1;
         for (int i = 0; i < SALength; i++) {
             if (SA[i] == 0) {
@@ -388,9 +456,12 @@ public class Graf {
     public Graf getReverseGraph() {
         Graf g = new Graf();
         int numberEdge = numberOfEdge();
-        for (int i = 0; i < numberEdge; i++) {
-            Edge e = listEdge.get(i);
-            g.addEdge(e.getTo(), e.getFrom());
+        for (Map.Entry<Node, List<Node>> entry : adjList.entrySet()) {
+            Node nodeFrom = entry.getKey();
+            for (int i = 0, c = entry.getValue().size(); i < c; i++) {
+                Node nodeTo = entry.getValue().get(i);
+                g.addEdge(nodeTo, nodeFrom);
+            }
         }
         return g;
     }
@@ -559,15 +630,24 @@ public class Graf {
      * @return a string of a dot representation
      */
     public String toDotString() {
+        sortMapNodeByKey();
         String dotStringGraph = "digraph g {\n";
         int numberEdge = numberOfEdge();
         int numberNode = numberOfNode();
-        for (int i = 0; i < numberNode; i++) {
-            dotStringGraph += " " + listNode.get(i).getNumber() + ";\n";
+
+        for (Map.Entry<Node, List<Node>> entry : adjList.entrySet()) {
+            int n = entry.getKey().getNumber();
+            dotStringGraph += " " + n + ";\n";
         }
-        for (int i = 0; i < numberEdge; i++) {
-            dotStringGraph += " " + listEdge.get(i).getFrom().getNumber() + " -> " + listEdge.get(i).getTo().getNumber() + ";\n";
+
+        for (Map.Entry<Node, List<Node>> entry : adjList.entrySet()) {
+            int nFrom = entry.getKey().getNumber();
+            for (Node nod : entry.getValue()) {
+                int nto = nod.getNumber();
+                dotStringGraph += " " + nFrom + " -> " + nto + ";\n";
+            }
         }
+
         dotStringGraph += "}";
         return  dotStringGraph;
     }
@@ -641,15 +721,17 @@ public class Graf {
                     g = new UndirectedGraf();
                 }
             }
-            String[] arrOfStr = listDot.get(i).split("");
+            String[] arrOfStr = listDot.get(i).split(" ");
             if (i != 0 && i != nbLineDotFile-1) {
-                if (arrOfStr.length > 2 && arrOfStr.length <= 6) {
-                    Node n1 = new Node(Integer.parseInt(arrOfStr[1]));
+                if (arrOfStr.length < 3) {
+                    String [] arrOfStrNode = arrOfStr[1].split(";");
+                    Node n1 = new Node(Integer.parseInt(arrOfStrNode[0]));
                     g.addNode(n1);
                 }
-                if (arrOfStr.length > 6) {
+                if (arrOfStr.length >= 3) {
+                    String [] arrOfStrEdge = arrOfStr[3].split(";");
                     Node n1 = new Node(Integer.parseInt(arrOfStr[1]));
-                    Node n2 = new Node(Integer.parseInt(arrOfStr[6]));
+                    Node n2 = new Node(Integer.parseInt(arrOfStrEdge[0]));
                     g.addNode(n1);
                     g.addNode(n2);
                     g.addEdge(n1, n2);
@@ -753,6 +835,9 @@ public class Graf {
         for (int i = 1; i < nodes; i++) {
             for (int j = 1; j < nodes; j++) {
                 if (!dg.existsEdge(new Edge(new Node(i), new Node(j)))) {
+                    if (i == j) {
+                        continue;
+                    }
                     dg.addEdge(new Node(i), new Node(j));
                 }
             }

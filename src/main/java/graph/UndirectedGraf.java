@@ -1,15 +1,15 @@
 package graph;
 
-
-import java.io.File;
-import java.io.FileWriter;
 import java.util.List;
 import java.util.Map;
 
+/***
+ * Graph is the class who create nodes, edges and realize many manipulation on undirected graph
+ */
 public class UndirectedGraf extends Graf {
 
-    public UndirectedGraf(Map<Node, List<Node>> adjList, List<Node> listNode, List<Edge> listEdge) {
-        super(adjList, listNode, listEdge);
+    public UndirectedGraf(Map<Node, List<Node>> adjList) {
+        super(adjList);
     }
 
     public UndirectedGraf() {
@@ -132,7 +132,7 @@ public class UndirectedGraf extends Graf {
      *
      * @return a string of a dot representation
      */
-    public String toDotString() {
+    /*public String toDotString() {
         String dotStringGraph = "graph g {\n";
         int numberEdge = numberOfEdge();
         for (int i = 0; i < numberEdge; i++) {
@@ -140,5 +140,5 @@ public class UndirectedGraf extends Graf {
         }
         dotStringGraph += "}";
         return  dotStringGraph;
-    }
+    }*/
 }
