@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="d0d8300d-7898-40e8-89fb-755b6b7c0258" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/graph/Graf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/graph/Graf.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/graph/UndirectedGraf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/graph/UndirectedGraf.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/graph/interfaceGraphique.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/graph/interfaceGraphique.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/graph/GrafTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/graph/GrafTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/graph/AppMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/graph/AppMain.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/graph/Edge.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/graph/Edge.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/graph/Graf$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/graph/Graf$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/graph/Graf.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/graph/Graf.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/graph/Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/graph/Node.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/graph/UndirectedGraf.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/graph/UndirectedGraf.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/graph/GrafTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/graph/GrafTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/graph/NodeTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/graph/NodeTest.class" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageViewManager">
+    <option name="myElementSize" value="572" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1RZ4O1orCZTUyx9F1pshZeIhAMD" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="clean validate compile test" />
+    </option>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.interfaceGraphique">
+    <configuration name="interfaceGraphique" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="graph.interfaceGraphique" />
+      <module name="graph" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="graph.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GrafTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="graph" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="graph.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="graph" />
+      <option name="MAIN_CLASS_NAME" value="graph.GrafTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GrafTest.checkConnectedGraph" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="graph" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="graph.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="graph" />
+      <option name="MAIN_CLASS_NAME" value="graph.GrafTest" />
+      <option name="METHOD_NAME" value="checkConnectedGraph" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GrafTest.checkDotFileToGraph" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="graph" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="graph.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="graph" />
+      <option name="MAIN_CLASS_NAME" value="graph.GrafTest" />
+      <option name="METHOD_NAME" value="checkDotFileToGraph" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GrafTest.checkParameterizedGraph" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="graph" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="graph.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="graph" />
+      <option name="MAIN_CLASS_NAME" value="graph.GrafTest" />
+      <option name="METHOD_NAME" value="checkParameterizedGraph" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.interfaceGraphique" />
+        <item itemvalue="JUnit.GrafTest" />
+        <item itemvalue="JUnit.GrafTest.checkDotFileToGraph" />
+        <item itemvalue="JUnit.GrafTest.checkConnectedGraph" />
+        <item itemvalue="JUnit.GrafTest.checkParameterizedGraph" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d0d8300d-7898-40e8-89fb-755b6b7c0258" name="Default Changelist" comment="" />
+      <created>1569861248411</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1569861248411</updated>
+      <workItem from="1569861250765" duration="8053000" />
+      <workItem from="1569953067745" duration="9803000" />
+      <workItem from="1570005208804" duration="10995000" />
+      <workItem from="1570030909244" duration="13807000" />
+      <workItem from="1570117548105" duration="10798000" />
+      <workItem from="1570445420456" duration="5448000" />
+      <workItem from="1570468738385" duration="52000" />
+      <workItem from="1570688347955" duration="6612000" />
+      <workItem from="1570720770811" duration="5663000" />
+      <workItem from="1571126158198" duration="9189000" />
+      <workItem from="1571160358080" duration="4484000" />
+      <workItem from="1571222661473" duration="3804000" />
+      <workItem from="1571246549184" duration="1254000" />
+      <workItem from="1571306670741" duration="12521000" />
+      <workItem from="1571324198198" duration="24000" />
+      <workItem from="1571402812573" duration="702000" />
+      <workItem from="1571585169707" duration="6543000" />
+      <workItem from="1571679509877" duration="1598000" />
+      <workItem from="1571689948851" duration="2213000" />
+      <workItem from="1571729511927" duration="6529000" />
+      <workItem from="1571925671603" duration="1013000" />
+    </task>
+    <task id="LOCAL-00001" summary="add">
+      <created>1571126543379</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1571126543379</updated>
+    </task>
+    <task id="LOCAL-00002" summary="add">
+      <created>1571135603554</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1571135603554</updated>
+    </task>
+    <task id="LOCAL-00003" summary="add">
+      <created>1571164875224</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1571164875225</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add" />
+    <option name="LAST_COMMIT_MESSAGE" value="add" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/graph$GrafTest.ic" NAME="GrafTest Coverage Results" MODIFIED="1571736229529" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>graph.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/graph$GrafTest__1_.ic" NAME="GrafTest (1) Coverage Results" MODIFIED="1570123579308" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>graph.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/graph$NodeTest.ic" NAME="NodeTest Coverage Results" MODIFIED="1569875173330" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>graph.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/graph$GrafTest_addNodesWithManyEdge.ic" NAME="GrafTest.addNodesWithManyEdge Coverage Results" MODIFIED="1569874113156" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>graph.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/graph$GrafTest_addManyNodeWithConstructor.ic" NAME="GrafTest.addManyNodeWithConstructor Coverage Results" MODIFIED="1569956946164" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>graph.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/graph$GrafTest_checkConnectedGraph.ic" NAME="GrafTest.checkConnectedGraph Coverage Results" MODIFIED="1570729447785" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>graph.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/graph$interfaceGraphique.ic" NAME="interfaceGraphique Coverage Results" MODIFIED="1571226839126" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>graph.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/graph$GrafTest_checkParameterizedGraph.ic" NAME="GrafTest.checkParameterizedGraph Coverage Results" MODIFIED="1570729408265" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>graph.*</FILTER>
+    </SUITE>
+  </component>
+</project>
