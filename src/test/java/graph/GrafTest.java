@@ -182,6 +182,11 @@ public class GrafTest {
         Graf g = new Graf(2, 4, 0, 0, 6, 0, 2, 3, 5, 8, 0, 0, 4, 7, 0, 3, 0, 7, 0);
         g.getAllNodes();
         g.getAllEdges();
+        int[] tabSA = g.getSuccessorArray();
+        int lgtTabSA = tabSA.length;
+        for (int i = 0; i < lgtTabSA; i++) {
+            System.out.print(tabSA[i]);
+        }
     }
 
     @Test
@@ -189,6 +194,11 @@ public class GrafTest {
         Graf g = new Graf(2, 3, 0, 3, 4, 6, 0, 6, 0, 5, 0, 2, 0, 4, 0);
         g.getAllNodes();
         g.getAllEdges();
+        int[] tabSA = g.getSuccessorArray();
+        int lgtTabSA = tabSA.length;
+        for (int i = 0; i < lgtTabSA; i++) {
+            System.out.print(tabSA[i]);
+        }
     }
 
 
@@ -555,5 +565,29 @@ public class GrafTest {
         System.out.println(g.numberOfEdge());
         assertEquals(1200, g.numberOfEdge());
         assertEquals(500, g.numberOfNode());
+    }
+
+    @Test
+    public void checkIsConnected() {
+        Graf g = new Graf();
+        Node n1 = new Node(1);
+        Node n2 = new Node(2);
+        Node n3 = new Node(3);
+        Node n4 = new Node(4);
+        Node n5 = new Node(5);
+        Node n6 = new Node(6);
+        Node n7 = new Node(7);
+        g.addEdge(n2,n1);
+       // g.addEdge(n1,n3);
+        g.addEdge(n3,n4);
+        g.addEdge(n4,n5);
+        g.addEdge(n6,n7);
+        System.out.println("Connected : " + g.isConnected());
+    }
+
+    @Test
+    public void checkDAGGraph() {
+        Graf g = Graf.DAG();
+        g.printList(g.getAllEdges());
     }
 }

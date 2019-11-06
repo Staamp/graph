@@ -34,7 +34,7 @@ public class Graf {
         this.adjList = new HashMap<Node, List<Node>>();
         int nodeNbr = node.length;
         if (nodeNbr == 0) {
-            return;
+			return;
         }
 
         int nodeFrom = 1;
