@@ -7,6 +7,7 @@ public class Edge implements Comparable<Edge> {
 
     private Node from;
     private Node to;
+    private int weighted;
 
     /***
      * Constructor of one edge
@@ -17,6 +18,19 @@ public class Edge implements Comparable<Edge> {
     public Edge(Node from, Node to) {
         this.from = from;
         this.to = to;
+    }
+
+    /***
+     * Constructor of one edge
+     *
+     * @param from the node from of one edge
+     * @param to the node to of one edge
+     * @param weighted if the graph is weighted
+     */
+    public Edge(Node from, Node to, int weighted) {
+        this.from = from;
+        this.to = to;
+        this.weighted = weighted;
     }
 
     /***
@@ -38,6 +52,15 @@ public class Edge implements Comparable<Edge> {
     }
 
     /***
+     * Getter on weighted of edge
+     *
+     * @return the weighted of edge
+     */
+    public int getWeighted() {
+        return weighted;
+    }
+
+    /***
      * Setter on node from of edge
      *
      * @param from set node from
@@ -53,6 +76,15 @@ public class Edge implements Comparable<Edge> {
      */
     public void setTo(Node to) {
         this.to = to;
+    }
+
+    /***
+     * Setter on weighted of edge
+     *
+     * @param to set weighted for one edge
+     */
+    public void setWeighted(int weighted) {
+        this.weighted = weighted;
     }
 
     /***

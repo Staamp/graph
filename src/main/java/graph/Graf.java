@@ -15,8 +15,6 @@ import static java.util.Map.Entry.comparingByKey;
 public class Graf {
 
     Map<Node, List<Node>> adjList;
-    //List<Node> listNode;
-    //List<Edge> listEdge;
 
     /***
      * Constructor of a graph
@@ -32,37 +30,30 @@ public class Graf {
      *
      * @param node list of node with successor array formalism
      */
-    //ERREUR REVOIR 03/10/2019
     public Graf(int ... node) {
         this.adjList = new HashMap<Node, List<Node>>();
         int nodeNbr = node.length;
-        if (nodeNbr != 0) {
-            Node n1 = new Node(1);
-            addNode(n1);
+        if (nodeNbr == 0) {
+            return;
         }
-        //System.out.println("Node nbr " + nodeNbr);
-       /* for (int i = 0; i <= nodeNbr -1; i++) {
-            //System.out.println("ADD NODE " + nodeNbr);
-            Node n2 = new Node(n1.getNumber());
+
+        int nodeFrom = 1;
+        for(int i = 0; i < nodeNbr; i++) {
             if (node[i] == 0) {
-                if (i <= nodeNbr) {
-                    n1.setNumber(node[i + 1]);
-                }
+                nodeFrom++;
                 continue;
             }
-            Node n3 = new Node(node[i]);
-            addNode(n3);
-            addEdge(n2, n3);
-        }*/
+            addEdge(new Node(nodeFrom), new Node(node[i]));
+        }
     }
 
 
 
-/*
- *
- * Nodes and Edges
- *
- */
+    /*
+     *
+     * Nodes and Edges
+     *
+     */
 
 
     /***
@@ -74,6 +65,15 @@ public class Graf {
         if (!existsNode(n)) {
             adjList.put(n, new ArrayList<Node>());
         }
+    }
+
+    /***
+     * Overload of the addNode function
+     *
+     * @param n the node added
+     */
+    public void addNode(int n) {
+        addNode(new Node(n));
     }
 
     /***
@@ -90,16 +90,34 @@ public class Graf {
     }
 
     /***
+     * Overload of the existsNode function
+     *
+     * @param n the node to control
+     * @return a boolean who say the edge exist
+     */
+    public boolean existsNode(int n) {
+        return existsNode(new Node(n));
+    }
+
+    /***
      * Function who check if the edge already exist
      *
      * @param e the edge to control
      * @return a boolean who say the edge exist
      */
     public boolean existsEdge(Edge e) {
-        for (int i = 0, c = adjList.size(); i < c; i++) {
-            /*if ((e.getFrom().getNumber() == adjList.get(i).getFrom().getNumber()) && (e.getTo().getNumber() == listEdge.get(i).getTo().getNumber())) {
-                return true;
-            }*/
+        if (!existsNode(e.getFrom())) {
+            return false;
+        }
+        if (!existsNode(e.getTo())) {
+            return false;
+        }
+        for (Map.Entry<Node, List<Node>> entry : adjList.entrySet()) {
+            for (int i = 0, c = entry.getValue().size(); i < c; i++) {
+                if (entry.getKey().getNumber() == e.getFrom().getNumber() && entry.getValue().get(i).getNumber() == e.getTo().getNumber()) {
+                    return true;
+                }
+            }
         }
         return false;
     }
@@ -129,6 +147,52 @@ public class Graf {
     }
 
     /***
+     * Overload of the addEdge function
+     *
+     * @param n1 the node from of edge
+     * @param n2 the node to of edge
+     */
+    public void addEdge(int n1, int n2) {
+        addEdge(new Node(n1), new Node(n2));
+    }
+
+    /***
+     * Overload on the addEdge function
+     *
+     * @param n1 the node from of edge
+     * @param n2 the node to of edge
+     * @param w the weighted of edge
+     */
+    public void addEdge(Node n1, Node n2, int w) {
+        if(!existsNode(n1)) {
+            System.out.println("The first node doesn't exists. He is added");
+            addNode(n1);
+        }
+        if(!existsNode(n2)) {
+            System.out.println("The second node doesn't exists. He is added");
+            addNode(n2);
+        }
+        Edge e = new Edge(n1, n2, w);
+        if (!existsEdge(e)) {
+            adjList.get(n1).add(n2);
+        } else {
+            System.out.print("The node " + e.toString() + " already exist. Please create a new edge with other node.");
+        }
+
+    }
+
+    /***
+     * Overload on the addEdge function
+     *
+     * @param n1 the node from of edge
+     * @param n2 the node to of edge
+     * @param w the weighted of edge
+     */
+    public void addEdge(int n1, int n2, int w) {
+        addEdge(new Node(n1), new Node(n2), w);
+    }
+
+    /***
      * Function who remove one node with one node given in parameters and check if the node exist
      *
      * @param n node who where remove
@@ -149,6 +213,15 @@ public class Graf {
     }
 
     /***
+     * Overload on the removeNode function
+     *
+     * @param n node who where remove
+     */
+    public void removeNode(int n) {
+        removeNode(new Node(n));
+    }
+
+    /***
      *  Function who remove one edge with two nodes given in parameters and check if the edge exist
      *
      * @param n1 node from of edge
@@ -166,6 +239,16 @@ public class Graf {
                 }
             }
         }
+    }
+
+    /***
+     *  Overload of the removeEdge function
+     *
+     * @param n1 node from of edge
+     * @param n2 node to of edge
+     */
+    public void removeEdge(int n1, int n2) {
+        removeEdge(new Node(n1), new Node(n2));
     }
 
     /***
@@ -194,6 +277,16 @@ public class Graf {
     }
 
     /***
+     * Overload of the getSuccessor function
+     *
+     * @param n the node where we want to know the successors
+     * @return the list of successors of node n
+     */
+    public List<Node> getSuccessors(int n) {
+        return getSuccessors(new Node(n));
+    }
+
+    /***
      * Function who return the list of in edge of node n
      *
      * @param n the node where we want to know the in edge
@@ -212,8 +305,17 @@ public class Graf {
                 }
             }
         }
-
         return  inEdge;
+    }
+
+    /***
+     * Overload of the getInEdge function
+     *
+     * @param n the node where we want to know the in edge
+     * @return the list of in edge of node n
+     */
+    public List<Edge> getInEdge(int n) {
+        return getInEdge(new Node(n));
     }
 
     /***
@@ -235,6 +337,16 @@ public class Graf {
     }
 
     /***
+     * Overload of the getOutEdge function
+     *
+     * @param n the node where we want to know the in edge
+     * @return the list of in edge of node n
+     */
+    public List<Edge> getOutEdge(int n) {
+        return getOutEdge(new Node(n));
+    }
+
+    /***
      * Function who return the list of incident edge of node n
      *
      * @param n the node where we want to know the incident edge
@@ -246,6 +358,17 @@ public class Graf {
         listIncident.addAll(getInEdge(n));
         return listIncident;
     }
+
+    /***
+     * Overload of the getIncidentEdges function
+     *
+     * @param n the node where we want to know the in edge
+     * @return the list of in edge of node n
+     */
+    public List<Edge> getIncidentEdges(int n) {
+        return getIncidentEdges(new Node(n));
+    }
+
 
     /***
      * Function who return the number of node in graph
@@ -283,7 +406,7 @@ public class Graf {
         for (Map.Entry<Node, List<Node>> entry : adjList.entrySet()) {
             int nodeNumber = entry.getKey().getNumber();
             listNode.add(entry.getKey());
-            System.out.println(nodeNumber);
+            //System.out.println(nodeNumber);
         }
         sortListNode(listNode);
         return listNode;
@@ -296,17 +419,17 @@ public class Graf {
      */
     public List<Edge> getAllEdges() {
         sortMapNodeByKey();
-        System.out.println("List of edges : ");
+        //System.out.println("List of edges : ");
         List<Edge> listEdge = new ArrayList<Edge>();
         int numberEdge = numberOfEdge();
         for (Map.Entry<Node, List<Node>> entry : adjList.entrySet()) {
             int nodeNumber = entry.getKey().getNumber();
             for (int i = 0, c = entry.getValue().size(); i < c; i++) {
-                System.out.println(nodeNumber + " -> " + entry.getValue().get((i)));
+                //System.out.println(nodeNumber + " -> " + entry.getValue().get((i)));
                 listEdge.add(new Edge(new Node(nodeNumber), new Node(entry.getValue().get(i).getNumber())));
             }
         }
-        System.out.println("\n");
+        //System.out.println("\n");
         return listEdge;
     }
 
@@ -325,11 +448,11 @@ public class Graf {
 
 
 
-/*
- *
- * Graph Representation
- *
- */
+    /*
+     *
+     * Graph Representation
+     *
+     */
 
 
     /***
@@ -380,18 +503,18 @@ public class Graf {
     public void sortMapNodeByKey() {
         Map<Node, List<Node>> current = adjList;
         Map<Node, List<Node>> lmap = new TreeMap<Node, List<Node>>(
-            new Comparator<Node>() {
-                @Override
-                public int compare(Node o1, Node o2) {
-                    if (o1.getNumber() > o2.getNumber()) {
-                        return 1;
+                new Comparator<Node>() {
+                    @Override
+                    public int compare(Node o1, Node o2) {
+                        if (o1.getNumber() > o2.getNumber()) {
+                            return 1;
+                        }
+                        if (o1.getNumber() < o2.getNumber()) {
+                            return -1;
+                        }
+                        return 0;
                     }
-                    if (o1.getNumber() < o2.getNumber()) {
-                        return -1;
-                    }
-                    return 0;
                 }
-            }
         );
         lmap.putAll(current);
         for (Map.Entry<Node, List<Node>> entry : adjList.entrySet()) {
@@ -441,11 +564,11 @@ public class Graf {
 
 
 
-/*
- *
- * Graph Transformation
- *
- */
+    /*
+     *
+     * Graph Transformation
+     *
+     */
 
 
     /***
@@ -516,11 +639,11 @@ public class Graf {
 
 
 
-/*
- *
- * Graph Traversal
- *
- */
+    /*
+     *
+     * Graph Traversal
+     *
+     */
 
     /***
      * Function who realize a dfs starting by the node given in parameters
@@ -566,6 +689,16 @@ public class Graf {
         }
 
         return DFS;
+    }
+
+    /***
+     * Overload of the getDFS function
+     *
+     * @param n the node by which to start to realize a dfs
+     * @return a list of node of the course
+     */
+    public List<Node> getDFS(int n) {
+        return getDFS(new Node(n));
     }
 
     /***
@@ -615,13 +748,23 @@ public class Graf {
         return BFS;
     }
 
+    /***
+     * Overload of the getBFS function
+     *
+     * @param n the node by which to start to realize a dfs
+     * @return a list of node of the course
+     */
+    public List<Node> getBFS(int n) {
+        return getBFS(new Node(n));
+    }
 
 
-/*
- *
- * Graph Export
- *
- */
+
+    /*
+     *
+     * Graph Export
+     *
+     */
 
 
     /***
@@ -656,8 +799,8 @@ public class Graf {
      * Function who exporting the graph as a file in the DOT syntax
      */
     public void toDotFile() {
-       //String pathOfFileOutput = "D:/Github/file.dot";
-       String pathOfFileOutput = System.getProperty("user.dir") + "/" + "graph.dot"; //Current directory
+        //String pathOfFileOutput = "D:/Github/file.dot";
+        String pathOfFileOutput = System.getProperty("user.dir") + "/" + "graph.dot"; //Current directory
         try {
             File ff = new File(pathOfFileOutput);
             ff.createNewFile();
@@ -772,7 +915,40 @@ public class Graf {
         return DotFileToGraph(pathOfFileOutput);
     }
 
+    /***
+     * Function who explore graph
+     *
+     * @param n the node start
+     * @param visited array of node explore
+     */
+    public void DFSUtil(Node n, boolean[] visited) {
+        visited[n.getNumber()] = true;
+        for (Map.Entry<Node, List<Node>> entry : adjList.entrySet()) {
+            if (!visited[entry.getKey().getNumber()]) DFSUtil(entry.getKey(), visited);
+        }
+    }
 
+    /***
+     * Function who say if the graph is connected or not
+     *
+     * @return a boolean value
+     */
+    public boolean isConnected() {
+        int nbnode = numberOfNode();
+        System.out.println(nbnode);
+        boolean[] visited = new boolean[nbnode + 1];
+        int iter = 0;
+        for (Map.Entry<Node, List<Node>> entry : adjList.entrySet()) {
+            if(!visited[entry.getKey().getNumber()]) {
+                DFSUtil(entry.getKey(), visited);
+                iter++;
+            }
+        }
+        if (iter > 1) {
+            return false;
+        }
+        return true;
+    }
 
     /***
      * Function who create a connected graph
@@ -785,7 +961,7 @@ public class Graf {
         int high = 50;
         int nodes = (int)(Math.random()*((high - low) + 1) + low);
         //int nodes = 10;
-        System.out.println("Number of nodes with math random " + nodes);
+        //System.out.println("Number of nodes with math random " + nodes);
 
         for (int i = 1; i < nodes; i++) {
             cg.addNode(new Node(i));
@@ -793,7 +969,7 @@ public class Graf {
         int lowEdge = 1;
         int maxEdge = nodes * nodes;
         int edges = (int)(Math.random()*((maxEdge - lowEdge) + 1) + lowEdge);
-        System.out.println("Number of edges with math random " + edges);
+        //System.out.println("Number of edges with math random " + edges);
         int n1 = 0;
         int n2 = 0;
         for (int i = 0; i < edges; i++) {
@@ -811,6 +987,10 @@ public class Graf {
             }
         }
 
+        if (!cg.isConnected()) {
+            connectedGraph();
+        }
+
         return cg;
     }
 
@@ -824,7 +1004,7 @@ public class Graf {
         int low = 5;
         int high = 50;
         int nodes = r.nextInt(high - low) + low;
-        System.out.println("Number of nodes with random : " + nodes);
+        //System.out.println("Number of nodes with random : " + nodes);
 
         Graf dg = new Graf();
 
@@ -894,11 +1074,57 @@ public class Graf {
     }
 
     /***
+     * Recursive function who search if the graph is cyclic or not
+     *
+     * @param n the node start
+     * @param visited array of node for save the node visited
+     * @param recStack array of node for save the node in stack
+     * @return a boolean value
+     */
+    public boolean isCyclicUtil(Node n, boolean[] visited, boolean[] recStack) {
+        if (recStack[n.getNumber()]) { return true; }
+        if (visited[n.getNumber()]) { return false; }
+        visited[n.getNumber()] = true;
+        recStack[n.getNumber()] = true;
+        List<Node> children = adjList.get(n);
+        for(Node c: children) {
+            if (isCyclicUtil(c, visited, recStack)) {
+                return true;
+            }
+        }
+        recStack[n.getNumber()] = false;
+        return false;
+    }
+
+    /***
+     * Function who compute a graph for discover is cyclic or not
+     *
+     * @return if the graph is cyclic or not
+     */
+    public boolean isCyclic() {
+        int nbNode = numberOfNode();
+        //System.out.println(nbNode);
+        boolean[] visited = new boolean[nbNode * nbNode];
+        boolean[] recStack = new boolean[nbNode * nbNode];
+
+        for (Map.Entry<Node, List<Node>> entry : adjList.entrySet()) {
+            if (isCyclicUtil(entry.getKey(), visited,recStack)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /***
      * Function who create a DAG (Directed acyclic graph)
      *
      * @return a DAG
      */
     public static Graf DAG() {
-        return null;
+        Graf g = null;
+        do {
+            g = connectedGraph();
+        } while (g.isCyclic());
+        return g;
     }
 }

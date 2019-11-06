@@ -34,6 +34,34 @@ public class GrafTest {
     }
 
     @Test
+    public void addoneNodeInt() {
+        Graf g = new Graf(adjList);
+        g.getAllNodes();
+        g.addNode(5);
+        g.getAllNodes();
+    }
+
+    @Test
+    public void removeOneNodeInt() {
+        Graf g = new Graf(adjList);
+        g.getAllNodes();
+        g.addNode(5);
+        g.getAllNodes();
+        g.removeNode(5);
+        g.getAllNodes();
+    }
+
+    @Test
+    public void removeOneNode() {
+        Graf g = new Graf(adjList);
+        g.getAllNodes();
+        g.addNode(new Node(5));
+        g.getAllNodes();
+        g.removeNode(5);
+        g.getAllNodes();
+    }
+
+    @Test
     public void addOneNode() {
         Node n = new Node("test", 1);
         Graf g = new Graf(adjList);

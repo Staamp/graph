@@ -1,5 +1,6 @@
 package graph;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,10 +13,22 @@ public class UndirectedGraf extends Graf {
         super(adjList);
     }
 
-    public UndirectedGraf() {
-        super();
-    }
+    public UndirectedGraf(int ... node) {
+        this.adjList = new HashMap<Node, List<Node>>();
+        int nodeNbr = node.length;
+        if (nodeNbr == 0) {
+            return;
+        }
 
+        int nodeFrom = 1;
+        for(int i = 0; i < nodeNbr; i++) {
+            if (node[i] == 0) {
+                nodeFrom++;
+                continue;
+            }
+            addEdge(new Node(nodeFrom), new Node(node[i]));
+        }
+    }
 
     @Override
     public void addNode(Node n) {
@@ -35,6 +48,7 @@ public class UndirectedGraf extends Graf {
     @Override
     public void addEdge(Node n1, Node n2) {
         super.addEdge(n1, n2);
+        super.addEdge(n2, n1);
     }
 
     @Override
@@ -132,13 +146,24 @@ public class UndirectedGraf extends Graf {
      *
      * @return a string of a dot representation
      */
-    /*public String toDotString() {
+    public String toDotString() {
+        sortMapNodeByKey();
         String dotStringGraph = "graph g {\n";
-        int numberEdge = numberOfEdge();
-        for (int i = 0; i < numberEdge; i++) {
-            dotStringGraph += " " + listEdge.get(i).getFrom().getNumber() + " -> " + listEdge.get(i).getTo().getNumber() + ";\n";
+
+        for (Map.Entry<Node, List<Node>> entry : adjList.entrySet()) {
+            int n = entry.getKey().getNumber();
+            dotStringGraph += " " + n + ";\n";
         }
+
+        for (Map.Entry<Node, List<Node>> entry : adjList.entrySet()) {
+            int nFrom = entry.getKey().getNumber();
+            for (Node nod : entry.getValue()) {
+                int nto = nod.getNumber();
+                dotStringGraph += " " + nFrom + " -- " + nto + ";\n";
+            }
+        }
+
         dotStringGraph += "}";
         return  dotStringGraph;
-    }*/
+    }
 }
